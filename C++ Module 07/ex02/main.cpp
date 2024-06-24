@@ -1,72 +1,50 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: prossi <prossi@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 16:01:42 by prossi            #+#    #+#             */
-/*   Updated: 2022/08/01 11:45:55 by prossi           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include <iostream>
 #include "Array.hpp"
 
-#include <iostream>
+int main() {
+    // Test default constructor
+    Array<int> arr1;
+    std::cout << "arr1 size: " << arr1.size() << std::endl; // Should print 0
 
-#define MAX_VAL 750
-
-int main(int, char**)
-{
-    Array<int> numbers(MAX_VAL);
-    int* mirror = new int[MAX_VAL];
-    srand(time(NULL));
-    
-	for (int i = 0; i < MAX_VAL; i++)
-    {
-        const int value = rand();
-        numbers[i] = value;
-        mirror[i] = value;
+    // Test constructor with size
+    unsigned int n = 5;
+    Array<int> arr2(n);
+    std::cout << "arr2 size: " << arr2.size() << std::endl; // Should print 5
+    for (unsigned int i = 0; i < arr2.size(); ++i) {
+        std::cout << "arr2[" << i << "]: " << arr2[i] << std::endl; // Should print 0 for all elements
     }
 
-	{
-        Array<int> tmp = numbers;
-        Array<int> test(tmp);
+    // Test copy constructor
+    Array<int> arr3 = arr2;
+    std::cout << "arr3 size: " << arr3.size() << std::endl; // Should print 5
+    for (unsigned int i = 0; i < arr3.size(); ++i) {
+        std::cout << "arr3[" << i << "]: " << arr3[i] << std::endl; // Should print 0 for all elements
     }
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        if (mirror[i] != numbers[i])
-        {
-            std::cerr << "didn't save the same value!!" << std::endl;
-            return 1;
-        }
-    }
-    
-	try
-    {
-        numbers[-2] = 0;
-    }
-    
-	catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    
-	try
-    {
-        numbers[MAX_VAL] = 0;
-    }
-    
-	catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
+    // Modify original array and check copy
+    arr2[2] = 42;
+    std::cout << "arr2[2]: " << arr2[2] << std::endl; // Should print 42
+    std::cout << "arr3[2]: " << arr3[2] << std::endl; // Should still print 0
+
+    // Test assignment operator
+    Array<int> arr4;
+    arr4 = arr2;
+    std::cout << "arr4 size: " << arr4.size() << std::endl; // Should print 5
+    for (unsigned int i = 0; i < arr4.size(); ++i) {
+        std::cout << "arr4[" << i << "]: " << arr4[i] << std::endl; // Should print same values as arr2
     }
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        numbers[i] = rand();
+    // Modify original array and check assigned copy
+    arr2[3] = 99;
+    std::cout << "arr2[3]: " << arr2[3] << std::endl; // Should print 99
+    std::cout << "arr4[3]: " << arr4[3] << std::endl; // Should still print 0
+
+    // Test out of bounds access
+    try {
+        std::cout << arr2[10] << std::endl; // Should throw exception
+    } catch (const std::exception& e) {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
     }
-    delete [] mirror;
+
     return 0;
 }

@@ -14,21 +14,21 @@
 
 #include "Form.hpp"
 #include <iostream>
+#include <fstream>
 #include <string>
 
-class RobotomyRequestForm : public Form 
+class RobotomyRequestForm : public Form
 {
-    public:
+private:
+        std::string target;
 
+public:
         RobotomyRequestForm();
-        RobotomyRequestForm(std::string Target);
-        RobotomyRequestForm(RobotomyRequestForm const & src);
+        RobotomyRequestForm(std::string target);
+        RobotomyRequestForm(RobotomyRequestForm const &other);
         ~RobotomyRequestForm();
 
-        RobotomyRequestForm & operator=(RobotomyRequestForm const & obj);
-        void action() const;
-    
-	private:
+        RobotomyRequestForm &operator=(RobotomyRequestForm const &obj);
 
-        std::string Target;
+        void action() const;
 };

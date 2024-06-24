@@ -15,19 +15,19 @@
 #include <deque>
 
 template <typename T>
-class MutantStack : public std::stack<T, std::deque<T> > 
+class MutantStack : public std::stack<T, std::deque<T> >
 {
     public:
         MutantStack() {};
         MutantStack(MutantStack const & other):std::stack<T>(other) {};
-        ~MutantStack() 
+        ~MutantStack()
 		{
             this->c.clear();
         };
 
-        MutantStack & operator=(MutantStack const & obj) 
+        MutantStack & operator=(MutantStack const & obj)
 		{
-            if (obj != *this) 
+            if (obj != *this)
 			{
                 this->c = obj.c;
             }

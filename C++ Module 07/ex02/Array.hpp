@@ -1,36 +1,38 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Array.hpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: prossi <prossi@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 16:01:56 by prossi            #+#    #+#             */
-/*   Updated: 2022/08/01 11:44:16 by prossi           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef ARRAY_HPP
+#define ARRAY_HPP
 
-#pragma once
-
-#include "Array.tpp"
+#include <stdexcept>
 
 template <typename T>
-
-class Array 
-{
-	public:
-
+class Array {
+public:
+    // Default constructor: Creates an empty array
     Array();
-    Array(unsigned int size);
+
+    // Constructor with size: Creates an array of n elements initialized by default
+    Array(unsigned int n);
+
+    // Copy constructor
     Array(const Array& other);
-    ~Array();
+
+    // Assignment operator
     Array& operator=(const Array& other);
+
+    // Destructor
+    ~Array();
+
+    // Subscript operator for accessing elements
     T& operator[](unsigned int index);
     const T& operator[](unsigned int index) const;
-    unsigned int size() const;
-	
-	private:
 
-    T* m_array;
-    unsigned int m_size;
+    // Member function to return the number of elements in the array
+    unsigned int size() const;
+
+private:
+    unsigned int size_;
+    T* data_;
 };
+
+#include "Array.cpp"
+
+#endif // ARRAY_HPP

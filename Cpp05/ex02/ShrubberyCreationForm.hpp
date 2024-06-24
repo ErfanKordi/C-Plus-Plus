@@ -17,19 +17,17 @@
 #include <string>
 #include <fstream>
 
-class ShrubberyCreationForm : public Form 
+class ShrubberyCreationForm : public Form
 {
-    public:
+public:
+    ShrubberyCreationForm();
+    ShrubberyCreationForm(std::string Target);
+    ShrubberyCreationForm(ShrubberyCreationForm const &src);
+    ~ShrubberyCreationForm();
 
-        ShrubberyCreationForm();
-        ShrubberyCreationForm(std::string Target);
-        ShrubberyCreationForm(ShrubberyCreationForm const & src);
-        ~ShrubberyCreationForm();
+    ShrubberyCreationForm &operator=(ShrubberyCreationForm const &obj);
+    void action() const;
 
-        ShrubberyCreationForm & operator=(ShrubberyCreationForm const & obj);
-        void action() const;
-    
-    private:
-
-        std::string Target;
+private:
+    std::string Target;
 };

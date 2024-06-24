@@ -15,25 +15,25 @@
 #include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 
-int main(void) 
+int main(void)
 {
-    try 
+    try
 	{
-        Form *SCF = new ShrubberyCreationForm("home");
+        ShrubberyCreationForm SCF("home");
+       // Form *SCF = new ShrubberyCreationForm("home");
         Bureaucrat b1("Bob", 136);
         Bureaucrat b2("Jhon", 145);
-        b2.signForm(*SCF);
-        b1.executeForm(*SCF);
+        b2.signForm(SCF);
+        b1.executeForm(SCF);
 
-        b2.executeForm(*SCF);
-        delete SCF;
+        b2.executeForm(SCF);
     }
-    
+
 	catch (std::exception & e) {
         std::cout << "Exception: " << e.what() << std::endl;
     }
 
-    try 
+    try
 	{
         Form *SCF = new RobotomyRequestForm("home");
         Bureaucrat b1("Bob2", 44);
@@ -44,13 +44,13 @@ int main(void)
         b2.executeForm(*SCF);
         delete SCF;
     }
-    
-	catch (std::exception & e) 
+
+	catch (std::exception & e)
 	{
         std::cout << "Exception: " << e.what() << std::endl;
     }
 
-    try 
+    try
 	{
         Form *SCF = new PresidentialPardonForm("home");
         Bureaucrat b1("Bob2", 5);
@@ -61,8 +61,8 @@ int main(void)
         b2.executeForm(*SCF);
         delete SCF;
     }
-    
-	catch (std::exception & e) 
+
+	catch (std::exception & e)
 	{
         std::cout << "Exception: " << e.what() << std::endl;
     }
